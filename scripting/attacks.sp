@@ -480,8 +480,8 @@ public Action Event_PlayerSpawn(Event event, const char[] name, bool dontBroadca
     GetTeamsClientCounts(tHumanCount, ctHumanCount);
     nPlayers = tHumanCount + ctHumanCount;
 
-    int randomcondition;
-    if(nPlayers<=5){
+    int randomcondition=1;
+    if(nPlayers>2&&nPlayers<=5){
     randomcondition=GetRandomInt(1,nPlayers);
     }
     else{
@@ -493,7 +493,7 @@ public Action Event_PlayerSpawn(Event event, const char[] name, bool dontBroadca
         return;
 
     if (!g_RoundSpawnsDecided) {
-        /*if (IsPlayer(g_BombOwner)) {
+        if (IsPlayer(g_BombOwner)) {
             g_SpawnIndices[g_BombOwner] = SelectSpawn(CS_TEAM_T, true,nPlayers, randomcondition);
         }
 
@@ -501,15 +501,6 @@ public Action Event_PlayerSpawn(Event event, const char[] name, bool dontBroadca
             if (IsPlayer(i) && IsOnTeam(i) && i != g_BombOwner) {
                 g_SpawnIndices[i] = SelectSpawn(g_Team[i], false, nPlayers, randomcondition);
             }
-        }*/
-        for (int i = 1; i <= MAXPLAYERS; i++) {
-            if (IsPlayer(i) && IsOnTeam(i) && i != g_BombOwner) {
-                g_SpawnIndices[i] = SelectSpawn(g_Team[i], false, nPlayers, randomcondition);
-            }
-        }
-        
-        if(IsPlayer(g_BombOwner)) {
-        g_SpawnIndices[g_BombOwner] = SelectSpawn(CS_TEAM_T, true, nPlayers, randomcondition);
         }
         g_RoundSpawnsDecided = true;
     }
@@ -762,9 +753,12 @@ public void UpdateTeams() {
         g_NumT = 1;
     int temp;
     g_NumCT = g_ActivePlayers - g_NumT;
+    if(g_NumCT>1)
+    {
     temp=g_NumCT;
     g_NumCT=g_NumT;
     g_NumT=temp;
+    }
 
     Call_StartForward(g_hOnTeamSizesSet);
     Call_PushCellRef(g_NumT);
