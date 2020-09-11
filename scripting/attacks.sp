@@ -119,12 +119,12 @@ Handle g_OnRoundWon;
 Handle g_OnSitePicked;
 Handle g_OnWeaponsAllocated;
 
-#include "retakes/generic.sp"
-#include "retakes/editor.sp"
-#include "retakes/editor_commands.sp"
-#include "retakes/editor_menus.sp"
-#include "retakes/natives.sp"
-#include "retakes/spawns.sp"
+#include "attacks/generic.sp"
+#include "attacks/editor.sp"
+#include "attacks/editor_commands.sp"
+#include "attacks/editor_menus.sp"
+#include "attacks/natives.sp"
+#include "attacks/spawns.sp"
 
 
 
